@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 		sdl sdl_ph{SDL_INIT_VIDEO};
 		if(!SDL_HasClipboardText()){std::clog<<"No text found\n"; return 1;}
 		auto ctext=SDL_GetClipboardText();
-		if(!ctext){LOG_ERR_TRY_GET_SDL_ERRs std::clog<<STR_FILE_FUNC_XSTR_LINE<<'\n'; return 1;}
+		if(!ctext){LOG_ERR_TRY_GET_SDL_ERRs STD_CLOG_FILE_FUNC_LINE; return 1;}
 		auto rem=strchr(ctext,'\\');
 		if(rem){
 			do{
@@ -28,12 +28,12 @@ int main(int argc, char *argv[])
 				++rem;
 			}
 		}
-		if(SDL_SetClipboardText(ctext)){LOG_ERR_TRY_GET_SDL_ERRs std::clog<<STR_FILE_FUNC_XSTR_LINE<<'\n'; return 1;}
+		if(SDL_SetClipboardText(ctext)){LOG_ERR_TRY_GET_SDL_ERRs STD_CLOG_FILE_FUNC_LINE; return 1;}
 		return 0;
 	}catch(const std::exception &e){
-		std::clog<<e.what()<<'\n';
+		STD_CLOG_FILE_FUNC_LINE_EX_FLUSH_NOEXCEPTs(e)
 	}catch(...){
-		std::clog<<"Error\n";
+		STD_CLOG_FILE_FUNC_LINE_FLUSH_NOEXCEPTs
 	}
 	return 1;
 }
